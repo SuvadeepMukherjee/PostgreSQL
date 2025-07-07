@@ -96,6 +96,6 @@ INSERT INTO person (id,name,city)
 values (201,'Suvadeep','Indore')
 ```
 
-Note => We must pass 'Raju' with single quotes because double quotes " are for column or table names in PostgreSQL
+Note => We must pass 'Suvadeep' with single quotes because double quotes " are for column or table names in PostgreSQL
 
 
