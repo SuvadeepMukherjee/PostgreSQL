@@ -209,26 +209,252 @@ lastname varchar(50)
 )
 ```
 
-#### Task 1
+#### Clauses
 
-Create Database bank_db
+Where Clause Examples;-
 
 ```sql
-CREATE TABLE employees(
-
-    emp_id SERIAL PRIMARY KEY,
-
-    fname varchar(50) NOT NULL,
-
-    lname varchar(50) NOT NULL,
-
-    email varchar(100) NOT NULL UNIQUE,
-
-    dept VARCHAR(50),
-
-    salary DECIMAL(10,2) DEFAULT 30000.00,
-
-    hire_date DATE NOT NULL DEFAULT CURRENT_DATE 
-
-)
+select * frpm employees where emp_id = 5
 ```
+
+```sql
+select * from employees where dept='HR';
+```
+
+```sql
+select * from employees where dept='HR';
+```
+
+```sql
+select * from employees where dept ='IT' or dept='Finance';
+```
+
+```sql
+select * from employees where dept ='IT' and salary>50000;
+```
+
+ IN Operator => select all in 
+
+NOT IN Operator => selects all not in 
+
+```sql
+select * from employees where dept in ('IT','Finance','HR');
+```
+
+```sql
+select * from employees where dept not in ('IT','Finance','HR');
+
+```
+
+**Find employees whose salary is more than 40000 and less than 65000** ? 
+
+```sql
+select * from employees where salary between 40000 and 65000
+```
+
+Distinct =>Chooses only distinct 
+
+```sql
+select distinct dept from employees;
+```
+
+Order by => sorts data according to column by default in ascending order 
+
+```sql
+select * from employees order by fname;
+```
+
+```sql
+select * from employees order by fname desc;
+```
+
+The above querry will sort by descending order of fname 
+
+```sql
+select * from employees order by emp_id desc;
+```
+
+THe above querry will sort in descending order by emp_id
+
+```sql
+select * from employees limit 3 
+```
+
+The above querry will only show the first 3 details of employees 
+
+
+
+```sql
+select * from employees where fname like 'A%';
+```
+
+THe above querry will select details of employees whose first name starts with A 
+
+
+
+```sql
+select * from employees where fname like '%A'
+```
+
+The above querry will select detaisl of employees whose last name ends with A 
+
+```sql
+select * from employees where fname like '%i%';
+```
+
+The above querry will select details of employees who have i in their fname
+
+
+
+```sql
+select * from employees where dept like '__';
+```
+
+The above querry will select details of employees where department is of 2 charcters
+
+```sql
+select * from employees where dept like '_A%';
+```
+
+The above querry will select details of employees where second charcte of department is A
+
+---
+
+## Section 5 (Aggregate Functions)
+
+Use cases of aggregate functions : 
+
+- How to find total number of employees ? 
+
+- Employee with max salary 
+
+- Average salary of emplyees 
+
+Common aggregate functions 
+
+- Count
+
+- Sum
+
+- Avg
+
+- Min
+
+- Max
+
+**Count number of rows**:*
+
+```sql
+select count(emp_id) from employees;
+
+select count(fname) from employees; 
+
+```
+
+**Count salary of all employees**:
+
+```sql
+select sum(salary) from employees;
+```
+
+**Count average salary of all employees**:
+
+```sql
+select avg(salary) from employees;
+```
+
+**Count minimum salary**:
+
+```sql
+select min(salary) from employees;
+```
+
+**Count maximum salary**:
+
+```sql
+select max(salary) from employees;
+```
+
+Group by examples:
+
+1. select dept from employees group by dept; 
+
+2. select dept,count(fname) from employees group by dept;
+
+3. select dept,sum(salary) from employees group by dept;
+
+
+
+---
+
+#### Section -6 (String Functions)
+
+concat syntax => *concat(first_col,sec_col)*
+
+Examples 
+
+- select concat(fname,lname) from employees;
+
+- select concat(fname,lname) as fullname from employees;
+
+- select emp_id,concat(fname, ' ',lname) as fullname,dept from employees;
+
+concat_ws syntax => concat_ws('-',fname,lname)
+
+Examples 
+
+- select concat_ws('-',fname,lname) as fullname from employees;
+
+- select concat_ws('-','One','Two','Three');
+
+substring 
+
+examples 
+
+- select substring('Hello Buddy!',1,5);
+
+REPLACE syntax => REPLACE(str,from_str,to_str)
+
+Examples 
+
+- REPLACE('Hey Buddy','Hey','Hello) will be Hello Buddy
+
+- select replace('ABCXYZ','ABC','PQR'); will PQRXYZ
+
+- select replace(dept,'IT','Tech') from employees;
+
+REVERSE
+
+examples 
+
+- SELECT REVERSE('Hello');
+
+- select reverse(fname) from employees;
+
+LENGTH
+
+examples
+
+- select length('Hello World'); => 11
+
+UPPER
+
+examples
+
+- select upper(fname) from employees;
+
+LEFT,RIGHT,TRIM 
+
+examples 
+
+- select left('Abcdefghij',3);
+
+- select right('Abcdefghij',4);
+
+- select trim('    Alright!   ');
+
+POSITION
+
+examples
+
+- SELECT POSITION('om' in 'Thomas');
