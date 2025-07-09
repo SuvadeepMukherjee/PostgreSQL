@@ -653,8 +653,6 @@ Types of relationship :
 
 Create a database => create db => storedb
 
-
-
 The One-Many relationship we will be using : 
 
 ![](../Assets/One-Many.png)
@@ -683,7 +681,6 @@ cust_id integer not null,
 foreign key(cust_id) references customers(cust_id)
 
 )
-
 ```
 
 Insert the following data into the customers table 
@@ -708,5 +705,4 @@ values
 ('2024-03-01',3,450.00),
 
 ('2024-04-04',2,550.00);
-
 ```
