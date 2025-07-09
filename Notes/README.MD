@@ -468,12 +468,9 @@ insert into person(id,name,city)
 values (102,'Sham','Mumbai'),
 (103,'Paul','Chennai'),
 (104,'Alex','Pune');
-
 ```
 
 **How to add or remove a column ?****
-
-
 
 Adding Column : 
 
@@ -521,8 +518,6 @@ example:
 alter table person rename column name to fname;
 ```
 
-
-
 **How to rename a table name ?**
 
 There are 2 ways to rename a table name ? 
@@ -530,8 +525,6 @@ There are 2 ways to rename a table name ?
 1. alter table contacts rename to mycontacts;
 
 2. rename table contacts to mycontacts;
-
-
 
 **How to modify a column ? (Changing datatype or adding default value) ?**
 
@@ -561,7 +554,6 @@ name varchar(50),
 mob varchar(150) unique check (length(mob)>=10)
 
 )
-
 ```
 
 Example : -
@@ -571,7 +563,7 @@ alter table person
 
 add column varchar(15) check (length(mob)>=10);
 
- 
+
 insert into person (mob) values (123) (Will throw an error)
 
 
@@ -594,7 +586,6 @@ Examples :
 alter table person drop constraint person_mob_check ;
 
 insert into person (mob) values(123);
-
 ```
 
 **Named Constraint***
@@ -628,7 +619,6 @@ when salary > = 50000 then 'high'
 else 'Low'
 
 end as sal_cat from employees;
-
 ```
 
 Example : 
@@ -647,5 +637,76 @@ else 'Low'
 end as sal_cat
 
 from employees;
+```
+
+---
+
+#### Relationship
+
+Types of relationship : 
+
+- One to One
+
+- One to Many
+
+- Many to Many 
+
+Create a database => create db => storedb
+
+
+
+The One-Many relationship we will be using : 
+
+![](../Assets/One-Many.png)
+
+Create a customers and an orders table 
+
+```sql
+create table customers(
+
+cust_id serial primary key,
+
+cust_name varchar(100) not null
+
+)
+
+create table orders(
+
+ord_id serial primary key,
+
+ord_date date not null,
+
+price numeric not null,
+
+cust_id integer not null,
+
+foreign key(cust_id) references customers(cust_id)
+
+)
+
+```
+
+Insert the following data into the customers table 
+
+```sql
+insert into customers(cust_name) values ('Raju'),('Sham'),('Paul'),('Alex');
+```
+
+Insert the following data into the orders table 
+
+```sql
+insert into orders (ord_date,cust_id,price)
+
+values
+
+('2024-01-01',1,250.00),
+
+('2024-01-15',1,300.00),
+
+('2024-02-01',2,150.00),
+
+('2024-03-01',3,450.00),
+
+('2024-04-04',2,550.00);
 
 ```
