@@ -243,7 +243,6 @@ select * from employees where dept in ('IT','Finance','HR');
 
 ```sql
 select * from employees where dept not in ('IT','Finance','HR');
-
 ```
 
 **Find employees whose salary is more than 40000 and less than 65000** ? 
@@ -282,15 +281,11 @@ select * from employees limit 3
 
 The above querry will only show the first 3 details of employees 
 
-
-
 ```sql
 select * from employees where fname like 'A%';
 ```
 
 THe above querry will select details of employees whose first name starts with A 
-
-
 
 ```sql
 select * from employees where fname like '%A'
@@ -303,8 +298,6 @@ select * from employees where fname like '%i%';
 ```
 
 The above querry will select details of employees who have i in their fname
-
-
 
 ```sql
 select * from employees where dept like '__';
@@ -348,7 +341,6 @@ Common aggregate functions
 select count(emp_id) from employees;
 
 select count(fname) from employees; 
-
 ```
 
 **Count salary of all employees**:
@@ -382,8 +374,6 @@ Group by examples:
 2. select dept,count(fname) from employees group by dept;
 
 3. select dept,sum(salary) from employees group by dept;
-
-
 
 ---
 
@@ -458,3 +448,204 @@ POSITION
 examples
 
 - SELECT POSITION('om' in 'Thomas');
+
+---
+
+#### Alter Tables
+
+```sql
+create table person(
+
+id INT,
+
+name varchar(100),
+
+city varchar(100)
+
+);
+
+insert into person(id,name,city)
+values (102,'Sham','Mumbai'),
+(103,'Paul','Chennai'),
+(104,'Alex','Pune');
+
+```
+
+**How to add or remove a column ?****
+
+
+
+Adding Column : 
+
+```sql
+Syntax ;- alter table contacts add column city varchar(50)
+```
+
+Example :
+
+```sql
+ alter table person add column age INT
+```
+
+Dropping Column : 
+
+Syntax : 
+
+```sql
+alter table contacts drop column city
+```
+
+Example : 
+
+```sql
+alter table person drop column age 
+```
+
+Adding a column with a default value of 0
+
+```sql
+alter table person add column age int default 0 
+```
+
+Renaming a column : 
+
+Syntax : 
+
+```sql
+alter table contacts rename column name to full_name 
+```
+
+example: 
+
+```sql
+alter table person rename column name to fname;
+```
+
+
+
+**How to rename a table name ?**
+
+There are 2 ways to rename a table name ? 
+
+1. alter table contacts rename to mycontacts;
+
+2. rename table contacts to mycontacts;
+
+
+
+**How to modify a column ? (Changing datatype or adding default value) ?**
+
+```sql
+alter table person alter column fname set data type varchar(200)
+```
+
+```sql
+alter table person alter column fname set deafult 'unknown';
+```
+
+**How to set NOT NULL ?**
+
+```sql
+alter table person alter column fname set not null
+```
+
+**Check Contstraint*:
+
+To create a table with check constraint use the following querry :
+
+```sql
+create table contacts (
+
+name varchar(50),
+
+mob varchar(150) unique check (length(mob)>=10)
+
+)
+
+```
+
+Example : -
+
+```sql
+alter table person
+
+add column varchar(15) check (length(mob)>=10);
+
+ 
+insert into person (mob) values (123) (Will throw an error)
+
+
+insert into person (mob) values (1234567890) (Will work)
+```
+
+Alter table drop and add constraint:
+
+```sql
+alter table contacts drop constraint mob_no_less_than_10digits
+```
+
+```sql
+alter table contacts add constraint mob_not_null check (mob!=null)
+```
+
+Examples :
+
+```sql
+alter table person drop constraint person_mob_check ;
+
+insert into person (mob) values(123);
+
+```
+
+**Named Constraint***
+
+```sql
+create table contacts(
+
+name varchar(50),
+
+mob varchar(15),
+constraint mob_no_less_than_10_digits check(length(mob)>=10)
+
+)
+
+insert into contacts (mob) values ('123') (will result in an error)
+
+
+insert into contacts (mob) values ('1234567890');
+```
+
+**Case***
+Case Syntax: 
+
+```sql
+select fname,salary 
+
+case 
+
+when salary > = 50000 then 'high'
+
+else 'Low'
+
+end as sal_cat from employees;
+
+```
+
+Example : 
+
+```sql
+select fname,salary
+
+case 
+
+when salary >55000 then 'high'
+
+when salary between 48000 and 55000 then 'mid'
+
+else 'Low'
+
+end as sal_cat
+
+from employees;
+
+```
