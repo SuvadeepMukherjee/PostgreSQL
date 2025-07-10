@@ -706,3 +706,125 @@ values
 
 ('2024-04-04',2,550.00);
 ```
+
+Join operation is used to combine rows from two or more tables based on a related column between them 
+
+Types of join : 
+
+- cross join 
+
+- inner join 
+
+- left join
+
+- right join 
+
+**CROSS JOIN*** : Every table from one table is combined with every row from another table 
+
+Example : `select * from cutsomers cross join orders;`
+
+**INNER JOIN**: Returns only the rows where there is a match between the specified columns in both the left(or first) and right(or second) tables 
+
+```sql
+select * from customers c inner join orders o on c.cust_id=o.cust_id;
+```
+
+**INNER JOIN WITH GROUP BY**:
+
+```sql
+select name from customers
+
+inner join orders 
+
+on orders.cust_id = customers.cust_id
+
+group by name; 
+
+```
+
+Example : 
+
+```sql
+select c.cust_name , count(o.ord_id) from 
+
+customers c 
+
+inner join 
+
+orders o 
+
+on c.cust_id= o.cust_id
+
+group by cust_name;
+
+```
+
+Left Join : 
+
+Returns all rows from the left(or first) table and the matching rows from the right (or second ) table 
+
+```sql
+select * from customers c 
+
+left join 
+
+orders o 
+
+on c.cust_id = o.cust_id;
+
+```
+
+---
+
+#### Many - Many Relationship
+
+Create a students table : 
+
+```sql
+create table students(
+
+s_id serial primary key,
+
+name varchar(100) not null
+
+)
+
+
+
+```
+
+  Create a courses table : 
+
+```sql
+create table courses(
+
+c_id serial primary key,
+
+name varchar(100) not null,
+
+fee numeric not null
+
+)
+
+```
+
+Create the join table(Enrollment)
+
+```sql
+create table enrollment(
+
+emrollment_id serial primary key,
+
+s_id int not null,
+
+c_id int not null,
+
+enrollment_date date not null,
+
+foreign key(s_id) references students(s_id),
+
+foreign key(c_id) references cources(c_id)
+
+)
+
+```
