@@ -1,4 +1,4 @@
-# PostgreSQL Notes
+# PostgreSQL Note
 
 #### What is a database ?
 
@@ -739,7 +739,6 @@ inner join orders
 on orders.cust_id = customers.cust_id
 
 group by name; 
-
 ```
 
 Example : 
@@ -756,7 +755,6 @@ orders o
 on c.cust_id= o.cust_id
 
 group by cust_name;
-
 ```
 
 Left Join : 
@@ -771,7 +769,6 @@ left join
 orders o 
 
 on c.cust_id = o.cust_id;
-
 ```
 
 ---
@@ -788,9 +785,6 @@ s_id serial primary key,
 name varchar(100) not null
 
 )
-
-
-
 ```
 
   Create a courses table : 
@@ -805,7 +799,6 @@ name varchar(100) not null,
 fee numeric not null
 
 )
-
 ```
 
 Create the join table(Enrollment)
@@ -826,5 +819,4 @@ foreign key(s_id) references students(s_id),
 foreign key(c_id) references cources(c_id)
 
 )
-
 ```
